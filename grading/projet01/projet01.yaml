@@ -1,0 +1,107 @@
+- id: group_29c74e
+- Makefile: 0           # max 5, pas de regles de compilation definies
+- bit.h: # NE PAS REMPLIR CETTE LIGNE
+      typedef rot_dir_t: 1                   # max 1, 
+- bit.c: # NE PAS REMPLIR CETTE LIGNE
+  - lsb4(): 1                        # max 1, 
+  - msb4(): 1                        # max 1, 
+  - lsb8(): 1                        # max 1, 
+  - msb8(): 1                        # max 1, 
+  - merge4(): 1                      # max 1, 
+  - merge8(): 1                      # max 1, 
+  - bit_get(): 1                     # max 1, 
+  - bit_set(): 0.5                     # max 1, verification arguments
+  - bit_unset(): 0.5                   # max 1, verification arguments
+  - bit_edit(): 2                    # max 2, 
+  - bit_rotate(): 3                      # max 5, verification arguments + rotate de plus de 8 positions ?
+- alu.h: # NE PAS REMPLIR CETTE LIGNE
+      alu_output_t_t: 3                  # max 3, 
+- alu.c: # NE PAS REMPLIR CETTE LIGNE
+  - get_flag(): 5                        # max 6, pas de verification des arguments
+  - set_flag(): 5                        # max 6, pas de verification des arguments
+  - alu_add8(): # NE PAS REMPLIR CETTE LIGNE
+      vérification d'usage: 1         # max 1, 
+      modularisation: 5               # max 5, 
+      addition: 1                     # max 1, 
+      calcul des flags: 3             # max 3, 
+      partie set_flags: 3             # max 3, 
+  - alu_sub8(): # NE PAS REMPLIR CETTE LIGNE
+      soustraction: 1                 # max 1, 
+      calcul des flags: 3             # max 3, 
+  - alu_add16_low(): # NE PAS REMPLIR CETTE LIGNE
+      addition: 5                     # max 5, 
+      calcul des flags: 1             # max 1, 
+  - alu_add16_high(): # NE PAS REMPLIR CETTE LIGNE
+      addition: 2.5                     # max 2.5, 
+      calcul des flags: 0.5             # max 0.5, 
+  - alu_shift(): 6                  # max 6, 
+  - alu_shiftR_A(): 5               # max 5, 
+  - alu_rotate(): 5                 # max 5, 
+  - alu_carry_rotate(): 2.5           # max 2.5, 
+- bus.h: # NE PAS REMPLIR CETTE LIGNE
+      bus_t: 3                         # max 3, 
+- bus.c: # NE PAS REMPLIR CETTE LIGNE
+  - bus_plug(): # NE PAS REMPLIR CETTE LIGNE
+      vérification d'usage: 1             # max 1, variable check superflu
+      vérification de tout le bus: 2.5      # max 2.5,
+      modularisation: 2.5                   # max 2.5, 
+  - bus_forced_plug(): # NE PAS REMPLIR CETTE LIGNE
+      vérifications d'usage: 1            # max 1, variable check superflu
+      corps: 2.5                            # max 2.5, 
+      modularisation: 2.5                   # max 2.5, 
+  - bus_remap(): # NE PAS REMPLIR CETTE LIGNE
+      vérifications d'usage: 2            # max 2.5, pointeur memory de memory_t null
+      vérification du range: 2            # max 2,
+      corps (boucle): 2.5                   # max 2.5, 
+  - bus_unplug(): 3.5                    # max 3.5, 
+  - bus_read(): 3.5                      # max 3.5, 
+  - bus_write(): 3.5                     # max 3.5, 
+  - bus_read16(): 6                    # max 6, 
+  - bus_write16(): 6                   # max 6, 
+- component.h: # NE PAS REMPLIR CETTE LIGNE
+      component_t: 5                          # max 5, 
+- component.c: # NE PAS REMPLIR CETTE LIGNE
+  - component_create(): 6              # max 6, 
+  - component_shared(): 3.5              # max 3.5,
+  - component_free(): 5                # max 5, 
+- memory.h: # NE PAS REMPLIR CETTE LIGNE
+      addr_t: 1        # max 1, 
+      data_t: 1        # max 1, 
+      memory_t: 4      # max 4, 
+- memory.c: # NE PAS REMPLIR CETTE LIGNE
+  - memory_create(): 6              # max 6, 
+  - memory_free(): 2                # max 2.5, verification arguments
+- gameboy.h: # NE PAS REMPLIR CETTE LIGNE
+      gameboy_t: 5                         # max 5, 
+- gameboy.c: # NE PAS REMPLIR CETTE LIGNE
+  - gameboy_create(): # NE PAS REMPLIR CETTE LIGNE
+      vérification d'usage: 0.5          # max 0.5,
+      init de base: 2                  # max 2, 
+      plug work-ram: 5                 # max 5, 
+      plug echo-ram: 2.5                 # max 2.5, 
+  - gameboy_free(): 2                # max 5, verification arguments, unplug echo_ram, vous essayer de unplug+free des composants non-initialisé
+- cpu.h: # NE PAS REMPLIR CETTE LIGNE
+      typedef: 1           # max 1, 
+      une reg-pair: 5      # max 5, 
+      les autres: 3        # max 3, 
+      bus (pointeur): 2    # max 2, 
+      autres champs: 4     # max 4, 
+- cpu.c: # NE PAS REMPLIR CETTE LIGNE
+  - cpu_init(): 6                        # max 6, 
+  - cpu_plug(): 2                        # max 2, 
+  - cpu_free(): 1                        # max 2, verification arguments
+  - cpu_cycle(): 3                       # max 3, 
+- cpu-storage.c: # NE PAS REMPLIR CETTE LIGNE
+  - cpu_read_at_idx(): 3                 # max 6, verification arguments incorrecte, verification retour de fonctions
+  - cpu_read16_at_idx(): 1.5             # max 3, verification arguments incorrecte, verification retour de fonctions
+  - cpu_write_at_idx(): 3.5                # max 3.5, 
+  - cpu_write16_at_idx(): 1.5              # max 1.5, 
+  - cpu_SP_push(): 6                     # max 6, 
+  - cpu_SP_pop(): 5                      # max 6, verification d'arguments incorrecte
+- cpu-register.c: # NE PAS REMPLIR CETTE LIGNE
+  - cpu_reg_get(): 2                        # max 2.5, verification d'arguments incorrecte
+  - cpu_reg_pair_get(): 2                   # max 2, verification d'arguments incorrecte
+  - cpu_reg_set(): 2                        # max 2.5, 
+  - cpu_reg_pair_set(): 4.5                   # max 5, 
+- style: 0        # max 2, min -2, (normal = 0), 
+- bonus/malus: -1  # max 5, min -5, (normal = 0), magic numbers
